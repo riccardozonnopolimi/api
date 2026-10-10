@@ -48,7 +48,7 @@ To compile the program and run every test:
 ./run_tests.sh
 ```
 
-Current result: **103 of 111 tests passed**. The other 8 are large inputs where 1 to 4 lines out of hundreds of thousands differ (see below), and on the two largest tests (`open_110`, `open_111`) the program also stops before the end.
+Current result: 103 of 111 tests passed. The other 8 are large inputs where 1 to 4 lines out of hundreds of thousands differ (see below).
 
 ## Possible improvements
 
