@@ -1,2 +1,6 @@
-DS.Store
+cmake-build-*/
 .idea/
+.DS_Store
+*.o
+planner
+a.out
