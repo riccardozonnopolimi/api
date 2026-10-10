@@ -33,19 +33,27 @@ The program reads commands from standard input, one per line, and prints one res
 
 ```bash
 gcc -O2 -Wall -std=gnu11 -o planner src/main.c
-./planner < examples/example.txt
+./planner < tests/open_1.txt
 ```
 
-`examples/example.txt` contains a small scenario covering every command, including a tie between two routes with the same number of stops; the expected output is in `examples/example.output.txt`:
+The full specification provided by the course (in Italian) is in [`spec/Specifica_2022-2023.pdf`](spec/Specifica_2022-2023.pdf).
+
+## Tests
+
+The `tests/` folder contains the **111 public tests provided by the course**: each `open_N.txt` is an input and `open_N.output.txt` its expected output. Inputs range from a few lines to about 50 MB.
+
+To compile the program and run every test:
 
 ```bash
-./planner < examples/example.txt | diff - examples/example.output.txt && echo "OK"
+./run_tests.sh
 ```
+
+Current result: **103 of 111 tests passed**. The other 8 are large inputs where 1 to 4 lines out of hundreds of thousands differ (see below), and on the two largest tests (`open_110`, `open_111`) the program also stops before the end.
 
 ## Possible improvements
 
-- On a few very large inputs, a backward route does not always pick the right option among routes with the same number of stops (about 2 lines out of 184,000 in the largest test), so the tie-break rule needs further work.
-- The graph used for backward routes has a fixed maximum size (`MAX_QUEUE`), which could be replaced by dynamic allocation.
+- In the failing tests, a backward route does not always pick the right option among routes with the same number of stops, so the tie-break rule needs further work.
+- The graph used for backward routes has a fixed maximum size (`MAX_QUEUE`), which is not enough for the two largest tests; it could be replaced by dynamic allocation.
 - Station lookup is linear in the number of stations; a balanced search tree or a hash table would make it faster on large inputs.
 
 ## Author
